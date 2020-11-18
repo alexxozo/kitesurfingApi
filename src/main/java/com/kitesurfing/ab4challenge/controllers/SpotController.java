@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 public class SpotController {
 
     private final SpotRepository repo;
@@ -18,6 +19,7 @@ public class SpotController {
         this.repo = repo;
     }
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping(value = "/api/spots")
     public List listAllSpots() {
         List<Spot> spots = this.repo.findAll();
@@ -39,17 +41,17 @@ public class SpotController {
         return spots;
     }
 
-    @GetMapping(value = "/api/spots/{id}")
-    public Details getById(@PathVariable("id") String id) {
-        Optional<Spot> spot = this.repo.findById(id);
-        Details details = new Details();
-
-        if (spot.isPresent()) {
-            Spot actualSpot = spot.get();
-            details = new Details(actualSpot.getLongitude(), actualSpot.getLatitude(), actualSpot.getWhenToGo());
-        }
-        return details;
-    }
+//    @GetMapping(value = "/api/spots/{id}")
+//    public Details getById(@PathVariable("id") String id) {
+//        Optional<Spot> spot = this.repo.findById(id);
+//        Details details = new Details();
+//
+//        if (spot.isPresent()) {
+//            Spot actualSpot = spot.get();
+//            details = new Details(actualSpot.getLongitude(), actualSpot.getLatitude(), actualSpot.getWhenToGo());
+//        }
+//        return details;
+//    }
 
     @GetMapping(value = "/api/spots/countries")
     public List<String> getCountries() {

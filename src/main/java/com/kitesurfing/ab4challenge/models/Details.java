@@ -9,17 +9,13 @@ import lombok.ToString;
 @ToString
 
 public class Details {
-    private double longitude;
-    private double latitude;
+    private String shortDescription;
     private String whenToGo;
+    private String[] imageUrls;
 
-    public Details() {
-
-    }
-
-    public Details(double longitude, double latitude, String whenToGo) {
-        this.longitude = longitude;
-        this.latitude = latitude;
+    public Details(String shortDescription, String whenToGo, String[] imageUrls) {
+        this.shortDescription = shortDescription;
         this.whenToGo = whenToGo;
+        this.imageUrls = imageUrls;
     }
 }
