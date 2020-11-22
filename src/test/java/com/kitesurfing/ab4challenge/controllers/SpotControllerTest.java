@@ -8,7 +8,7 @@ public class SpotControllerTest {
 
     @Test
     public void listAllSpots() {
-        SpotController controller = new SpotController();
+//        SpotController controller = new SpotController();
 
     }
 }

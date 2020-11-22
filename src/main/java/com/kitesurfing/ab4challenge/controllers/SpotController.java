@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
-@CrossOrigin
 public class SpotController {
 
     private final SpotRepository repo;
@@ -19,7 +19,6 @@ public class SpotController {
         this.repo = repo;
     }
 
-    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping(value = "/api/spots")
     public List listAllSpots() {
         List<Spot> spots = this.repo.findAll();
