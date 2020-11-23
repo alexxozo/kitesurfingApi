@@ -8,84 +8,50 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @ToString
 
-@Document(collection = "spots")
+@Document(collection = "kitesurfing")
 public class Spot {
     @Id
     private String _id;
     private String name;
+    private String country;
+    private String locationCatalonianCoast;
+    private String shortDescription;
+    private int mainWindKts;
+    private String mainWindDir;
+    private String[] airTemp;
+    private String prefWind;
+    private String windProbability;
+    private String averageAirTemp;
+    private String[] waterTemp;
+    private String waveHeightMeter;
+    private String waveDirection;
+    private String cleanWater;
+    private String whenToGo;
+    private String[] imageUrls;
     private double longitude;
     private double latitude;
-    private int windProbability;
-    private String country;
-    private String whenToGo;
 
-    protected Spot() {
+    public Spot() {}
 
-    }
-
-    public Spot(String id, String name, double longitude, double latitude, int windProbability, String country, String whenToGo) {
-        this._id = id;
-        this.name = name;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.windProbability = windProbability;
-        this.country = country;
-        this.whenToGo = whenToGo;
-    }
-
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
+    public Spot(String _id, String name, String country, String locationCatalonianCoast, String shortDescription, int mainWindKts, String mainWindDir, String[] airTemp, String prefWind, String windProbability, String averageAirTemp, String[] waterTemp, String waveHeightMeter, String waveDirection, String cleanWater, String whenToGo, String[] imageUrls, double longitude, double latitude) {
         this._id = _id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public int getWindProbability() {
-        return windProbability;
-    }
-
-    public void setWindProbability(int windProbability) {
-        this.windProbability = windProbability;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
         this.country = country;
-    }
-
-    public String getWhenToGo() {
-        return whenToGo;
-    }
-
-    public void setWhenToGo(String whenToGo) {
+        this.locationCatalonianCoast = locationCatalonianCoast;
+        this.shortDescription = shortDescription;
+        this.mainWindKts = mainWindKts;
+        this.mainWindDir = mainWindDir;
+        this.airTemp = airTemp;
+        this.prefWind = prefWind;
+        this.windProbability = windProbability;
+        this.averageAirTemp = averageAirTemp;
+        this.waterTemp = waterTemp;
+        this.waveHeightMeter = waveHeightMeter;
+        this.waveDirection = waveDirection;
+        this.cleanWater = cleanWater;
         this.whenToGo = whenToGo;
+        this.imageUrls = imageUrls;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 }
