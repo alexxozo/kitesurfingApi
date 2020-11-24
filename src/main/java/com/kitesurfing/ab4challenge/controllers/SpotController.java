@@ -4,6 +4,7 @@ import com.kitesurfing.ab4challenge.models.Spot;
 import com.kitesurfing.ab4challenge.repositories.SpotRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,16 @@ public class SpotController {
     @GetMapping(value = "/api/spots/{id}")
     public Optional<Spot> getById(@PathVariable("id") String id) {
         return this.repo.findById(id);
+    }
+
+    @GetMapping(value = "/api/search")
+    public List<Spot> search(@RequestParam String temperature, @RequestParam String location, @RequestParam String windSpeed, @RequestParam String windDirection ){
+        System.out.println(
+                temperature
+        );
+
+        List<Spot> spots = this.repo.findAll();
+        return spots;
     }
 //
 //    @GetMapping(value = "/api/spots/bywind")
