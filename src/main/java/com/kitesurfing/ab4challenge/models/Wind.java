@@ -21,4 +21,12 @@ public class Wind {
         this.direction = direction;
         this.gusts = gusts;
     }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public double getAverageSpeed() {
+        return averageSpeed;
+    }
 }

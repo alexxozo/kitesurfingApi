@@ -10,5 +10,5 @@ public interface SpotRepositoryCustom {
 
     List<String> findDistinct(String field);
 
-    List<Spot> searchQuery(String temperature, String location, String windSpeed, String windDirection);
+    List<Spot> searchQuery(String temperature, String location, double windSpeed, String windDirection);
 }

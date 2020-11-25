@@ -4,9 +4,7 @@ import com.kitesurfing.ab4challenge.models.Spot;
 import com.kitesurfing.ab4challenge.repositories.SpotRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
@@ -21,6 +19,7 @@ public class SpotController {
     @GetMapping(value = "/api/spots")
     public List listAllSpots() {
         List<Spot> spots = this.repo.findAll();
+        System.out.println(spots);
         return spots;
     }
 
@@ -29,15 +28,80 @@ public class SpotController {
         return this.repo.findById(id);
     }
 
-    @GetMapping(value = "/api/search")
-    public List<Spot> search(@RequestParam String temperature, @RequestParam String location, @RequestParam String windSpeed, @RequestParam String windDirection ){
-        System.out.println(
-                temperature
-        );
+    @GetMapping(value = "/api/similar-spots/{id}")
+    public Set similarSpots(@PathVariable("id") String id) {
+        List<Spot> l = this.repo.findAll();
+        Set<Spot> output = new HashSet<>();
+        Optional<Spot> spot = getById(id);
+        if (spot.isEmpty()) return null;
+        Spot actualSpot = spot.get();
 
-        List<Spot> spots = this.repo.findAll();
-        return spots;
+        for(Spot s: l) {
+            if (!s.equals(actualSpot)) {
+                if (s.getLocation().equals(actualSpot.getLocation())) {
+                    output.add(s);
+                } else if (s.getTemperature().equals(actualSpot.getTemperature())) {
+                    output.add(s);
+                } else if (Math.abs(s.getWindSpeed() - actualSpot.getWindSpeed()) < 1e-6) {
+                    output.add(s);
+                } else if (s.getWindDirection().equals(actualSpot.getWindDirection())) {
+                    output.add(s);
+                }
+            } else {
+                continue;
+            }
+        }
+        if (output.size() < 3) {
+            while(output.size() < 3) {
+                int random = new Random().nextInt(l.size());
+                if (!l.get(random).equals(actualSpot)) {
+                    output.add(l.get(random));
+                }
+            }
+        }
+        return output;
+
     }
+
+    @GetMapping(value = "/api/search")
+    public List searchQuery(@RequestParam(value = "temperature", required = false) String temperature,
+                             @RequestParam(value = "location", required = true) String location,
+                             @RequestParam(value = "windSpeed", required = true) double windSpeed,
+                             @RequestParam(value = "windDirection", required = true) String windDirection ){
+        List<Spot> l = this.repo.findAll();
+        List<Spot> output = new ArrayList<>();
+        for(Spot s: l){
+            if(s.getLocation().equals(location)){
+                output.add(s);
+            } else if(s.getTemperature().equals(temperature)){
+                output.add(s);
+            } else if(Math.abs(s.getWindSpeed() - windSpeed) < 1e-6){ ;
+                output.add(s);
+            } else if(s.getWindDirection().equals(windDirection)){
+                output.add(s);
+            }
+        }
+        SearchResult out = new SearchResult(output);
+        return out.getOutput();
+
+    }
+
+    public class SearchResult {
+        private List output;
+
+        public SearchResult(List output) {
+            this.output = output;
+        }
+
+        public List getOutput() {
+            return output;
+        }
+    }
+//     @GetMapping
+//     public Set<Map.Entry<String, String>> search(@RequestParam Map<String, String> allParams) {
+//        System.out.println(allParams.entrySet());
+//        return allParams.entrySet();
+//    }
 //
 //    @GetMapping(value = "/api/spots/bywind")
 //    public List<Spot> listAllSpotsInInterval(@RequestBody Map<String, String> req) {

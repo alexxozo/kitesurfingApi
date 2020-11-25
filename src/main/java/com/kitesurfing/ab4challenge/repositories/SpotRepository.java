@@ -13,5 +13,7 @@ public interface SpotRepository extends MongoRepository<Spot, String>, SpotRepos
     List<Spot> findByCountry(String country);
     Spot findFirstByName(String name);
     List<Spot> findByWindProbabilityBetween(int from, int to);
+    List<Spot> searchQuery(String location, String temperature, double windSpeed, String windDirection);
+
 
 }

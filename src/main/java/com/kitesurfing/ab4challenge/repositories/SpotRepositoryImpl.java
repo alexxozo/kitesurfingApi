@@ -40,8 +40,9 @@ public class SpotRepositoryImpl implements SpotRepositoryCustom {
         return list;
     }
 
+
     @Override
-    public List<Spot> searchQuery(String temperature, String location, String windSpeed, String windDirection) {
+    public List<Spot> searchQuery(String temperature, String location, double windSpeed, String windDirection) {
         
         BasicDBObject searchQuery = new BasicDBObject();
         searchQuery.put("temperature", temperature);
