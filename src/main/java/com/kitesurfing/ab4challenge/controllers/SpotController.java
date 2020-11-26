@@ -3,7 +3,6 @@ package com.kitesurfing.ab4challenge.controllers;
 import com.kitesurfing.ab4challenge.models.Spot;
 import com.kitesurfing.ab4challenge.repositories.SpotRepository;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.ranges.Range;
 
 import java.util.*;
 
