@@ -7,8 +7,5 @@ import org.bson.Document;
 import java.util.List;
 
 public interface SpotRepositoryCustom {
-
     List<String> findDistinct(String field);
-
-    List<Spot> searchQuery(String temperature, String location, String windSpeed, String windDirection);
 }

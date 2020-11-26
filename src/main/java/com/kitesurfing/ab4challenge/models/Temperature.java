@@ -22,4 +22,8 @@ public class Temperature {
         this.averageAirTemp = averageAirTemp;
         this.seasonal = seasonal;
     }
+
+    public double getAirTemp(){
+        return airTemp;
+    }
 }

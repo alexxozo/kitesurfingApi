@@ -20,4 +20,8 @@ public class Waves {
         this.direction = direction;
         this.cleanWater = cleanWater;
     }
+
+    public String getDirection() {
+        return direction;
+    }
 }

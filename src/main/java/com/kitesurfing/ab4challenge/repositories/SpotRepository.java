@@ -14,4 +14,5 @@ public interface SpotRepository extends MongoRepository<Spot, String>, SpotRepos
     Spot findFirstByName(String name);
     List<Spot> findByWindProbabilityBetween(int from, int to);
 
+
 }

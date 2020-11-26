@@ -4,6 +4,8 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @ToString
@@ -30,6 +32,10 @@ public class Spot {
     private String[] imageUrls;
     private double longitude;
     private double latitude;
+//    private Temperature temperature;
+//    private WindSpeed windSpeed;
+//    private WindDirection windDirection;
+//    private Location location;
 
     public Spot() {}
 
@@ -53,5 +59,89 @@ public class Spot {
         this.imageUrls = imageUrls;
         this.longitude = longitude;
         this.latitude = latitude;
+//        this.windDirection = windDirection;
+//        this.windSpeed = windSpeed;
+//        this.location = location;
+//        this.temperature = temperature;
     }
+
+    public String getTemperature() {
+        return averageAirTemp;
+    }
+
+    public String getWindDirection() {
+        return mainWindDir;
+    }
+
+    public double getWindSpeed() {
+        return mainWindKts;
+    }
+
+    public String getLocation() {
+        return locationCatalonianCoast;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Spot spot = (Spot) o;
+        return _id.equals(spot._id);
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(_id);
+    }
+
+    //, Location location, Temperature temperature, WindDirection windDirection, WindSpeed windSpeed
+//    public class Location {
+//        public String location;
+//        public Location(String location) {
+//            this.location = locationCatalonianCoast;
+//        }
+//
+//        public String getLocation() {
+//            return location;
+//        }
+//    }
+//
+//    public class Temperature {
+//        public String temperature;
+//
+//        public Temperature(String temperature) {
+//            this.temperature = averageAirTemp;
+//        }
+//
+//        public String getTemperature() {
+//            return temperature;
+//        }
+//    }
+//
+//    public class WindDirection {
+//        public String windDirection;
+//
+//        public WindDirection(String windDirection) {
+//            this.windDirection = mainWindDir;
+//        }
+//
+//        public String getWindDirection() {
+//            return windDirection;
+//        }
+//    }
+//
+//    public class WindSpeed {
+//
+//        public double windSpeed;
+//
+//        public WindSpeed(double windSpeed) {
+//            this.windSpeed = mainWindKts;
+//        }
+//
+//        public double getWindSpeed() {
+//            return windSpeed;
+//        }
+//    }
+
 }
