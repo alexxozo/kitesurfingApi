@@ -38,7 +38,7 @@ public class SpotController {
         Spot actualSpot = spot.get();
 
         for(Spot s: l) {
-            if (!s.equals(actualSpot)) {
+            if (!s.equals(actualSpot) && output.size() < 3) {
                 if (s.getLocation().equals(actualSpot.getLocation())) {
                     output.add(s);
                 } else if (s.getTemperature().equals(actualSpot.getTemperature())) {
@@ -48,8 +48,6 @@ public class SpotController {
                 } else if (s.getWindDirection().equals(actualSpot.getWindDirection())) {
                     output.add(s);
                 }
-            } else {
-                continue;
             }
         }
         if (output.size() < 3) {
