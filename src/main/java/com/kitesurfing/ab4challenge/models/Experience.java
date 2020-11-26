@@ -36,14 +36,24 @@ public class Experience {
     private int rating;
     private String[] imageUrls;
     private Date date;
+    private String spot_id;
 
-    public Experience(String comment, String author, String one_word, int rating, String[] imageUrls, Date date) {
+    public Experience(String comment, String author, String one_word, int rating, String[] imageUrls, Date date, String spot_id) {
         this.comment = comment;
         this.author = author;
         this.one_word = one_word;
         this.rating = rating;
         this.imageUrls = imageUrls;
         this.date = date;
+        this.spot_id = spot_id;
+    }
+
+    public String getSpot_id() {
+        return spot_id;
+    }
+
+    public void setSpot_id(String spot_id) {
+        this.spot_id = spot_id;
     }
 
     public String getComment() {

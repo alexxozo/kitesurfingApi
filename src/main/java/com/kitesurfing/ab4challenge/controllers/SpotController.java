@@ -3,6 +3,7 @@ package com.kitesurfing.ab4challenge.controllers;
 import com.kitesurfing.ab4challenge.models.Spot;
 import com.kitesurfing.ab4challenge.repositories.SpotRepository;
 import org.springframework.web.bind.annotation.*;
+import org.w3c.dom.ranges.Range;
 
 import java.util.*;
 
@@ -73,9 +74,9 @@ public class SpotController {
         for(Spot s: l){
             if(s.getLocation().equals(location)){
                 output.add(s);
-            } else if(s.getTemperature().equals(temperature)){
+            } else if(Math.abs(Integer.valueOf(s.getTemperature()) - (Integer.valueOf(temperature))) < 5){
                 output.add(s);
-            } else if(Math.abs(s.getWindSpeed() - windSpeed) < 1e-6){ ;
+            } else if(Math.abs(s.getWindSpeed() - windSpeed) < 10){ ;
                 output.add(s);
             } else if(s.getWindDirection().equals(windDirection)){
                 output.add(s);
