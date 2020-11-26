@@ -17,6 +17,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SpotRepositoryImpl implements SpotRepositoryCustom {
 
@@ -42,15 +44,19 @@ public class SpotRepositoryImpl implements SpotRepositoryCustom {
 
     @Override
     public List<Spot> searchQuery(String temperature, String location, String windSpeed, String windDirection) {
-        
         BasicDBObject searchQuery = new BasicDBObject();
-        searchQuery.put("temperature", temperature);
-        searchQuery.put("location", location);
-        searchQuery.put("windSpeed", windSpeed);
-        searchQuery.put("windDirection", windDirection);
+        Pattern tempPattern = Pattern.compile("^([0-9]+)-([0-9]+)");
+        Matcher tempMatch = tempPattern.matcher(temperature);
+        System.out.println(temperature + "//" + tempMatch.group(0));
+//        System.out.println(tempMatch.group(0) + "   " + tempMatch.group(1));
+//        searchQuery.put("averageAirTemp", new Document().append("$gt", tempMatch.group(0)));
+//        searchQuery.put("location", location);
+//        searchQuery.put("windSpeed", windSpeed);
+//        searchQuery.put("windDirection", windDirection);
         FindIterable<Document> iterable = mongoTemplate.getDb().getCollection(collection).find(searchQuery);
         MongoCursor<Document> cursor = iterable.iterator();
         List<Spot> list = new ArrayList<>();
+
         while (cursor.hasNext()) {
             list.add(new Gson().fromJson(cursor.next().toJson(), Spot.class));
         }

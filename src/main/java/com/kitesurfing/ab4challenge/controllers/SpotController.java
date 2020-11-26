@@ -20,8 +20,7 @@ public class SpotController {
 
     @GetMapping(value = "/api/spots")
     public List listAllSpots() {
-        List<Spot> spots = this.repo.findAll();
-        return spots;
+        return this.repo.findAll();
     }
 
     @GetMapping(value = "/api/spots/{id}")
@@ -31,42 +30,8 @@ public class SpotController {
 
     @GetMapping(value = "/api/search")
     public List<Spot> search(@RequestParam String temperature, @RequestParam String location, @RequestParam String windSpeed, @RequestParam String windDirection ){
-        System.out.println(
-                temperature
-        );
-
-        List<Spot> spots = this.repo.findAll();
-        return spots;
-    }
-//
-//    @GetMapping(value = "/api/spots/bywind")
-//    public List<Spot> listAllSpotsInInterval(@RequestBody Map<String, String> req) {
-//        int from = Integer.parseInt(req.get("from"));
-//        int to = Integer.parseInt(req.get("to"));
-//        List<Spot> spots = this.repo.findByWindProbabilityBetween(from, to);
+//        List<Spot> spots = this.repo.searchQuery(temperature, location, windSpeed, windDirection);
 //        return spots;
-//    }
-//
-////    @GetMapping(value = "/api/spots/{id}")
-////    public Details getById(@PathVariable("id") String id) {
-////        Optional<Spot> spot = this.repo.findById(id);
-////        Details details = new Details();
-////
-////        if (spot.isPresent()) {
-////            Spot actualSpot = spot.get();
-////            details = new Details(actualSpot.getLongitude(), actualSpot.getLatitude(), actualSpot.getWhenToGo());
-////        }
-////        return details;
-////    }
-//
-//    @GetMapping(value = "/api/spots/countries")
-//    public List<String> getCountries() {
-//        List<String> countries = repo.findDistinct("country");
-//        return countries;
-//    }
-//
-//    @PostMapping(value = "/api/favorites/spots")
-//    public String addFavorite(@RequestBody Spot body) {
-//        return body.toString();
-//    }
+        return this.repo.findAll();
+    }
 }
